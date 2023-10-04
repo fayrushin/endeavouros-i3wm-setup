@@ -14,7 +14,7 @@ if [[ "$mode" = "light" ]]; then
 	sed -i "${n1}s/.*/  colorscheme = \"dayfox\",/" "/home/${user}/.config/nvim/lua/user/init.lua"
 	cp "/home/${user}/.config/tmux/tmux.light.conf" "/home/${user}/.tmux.conf"
 else
-	sed -i "${n1}s/.*/  colorscheme = \"carbonfox\",/" "/home/${user}/.config/nvim/lua/user/init.lua"
+	sed -i "${n1}s/.*/  colorscheme = \"nightfox\",/" "/home/${user}/.config/nvim/lua/user/init.lua"
 	cp "/home/${user}/.config/tmux/tmux.dark.conf" "/home/${user}/.tmux.conf"
 fi
 tmux source-file "/home/${user}/.tmux.conf"
