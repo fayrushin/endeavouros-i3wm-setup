@@ -274,7 +274,7 @@ bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill 
 bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_mute
 
 # mic mute toggle
-bindsym XF86AudioMicMute exec amixer sset Capture toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 i3blocks
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -288,7 +288,16 @@ bindsym $mod+o exec /usr/local/bin/switch-audio-port
 ## App shortcuts
 bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+n exec /usr/bin/thunar
-bindsym Print exec scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
+# Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied"
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png && notify-send "Screenshot copied"
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied"
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
