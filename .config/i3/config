@@ -335,6 +335,7 @@ workspace $ws6 output eDP-1-2
 assign [class="(?i)alacritty"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="discord"] $ws3
+assign [class="zoom"] $ws3
 assign [class="TelegramDesktop"] $ws4
 assign [class="Thunar"] $ws5
 
@@ -467,6 +468,7 @@ exec --no-startup-id /usr/bin/dunst
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [title="^zoom$"] floating enable
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
