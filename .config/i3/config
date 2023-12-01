@@ -322,14 +322,14 @@ set $ws9 "9"
 set $ws10 "10"
 
 # use workspaces on different displays:
-# where you have to replace VGA-0/HDMI-0 with the names for your displays
+# where you have to replace VGA-0/HDMI-1-0 with the names for your displays
 # you can get from xrandr command
-workspace $ws1 output HDMI-0
-workspace $ws2 output HDMI-0
-workspace $ws3 output HDMI-0
-workspace $ws4 output eDP-1-2
-workspace $ws5 output eDP-1-2
-workspace $ws6 output eDP-1-2
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output secondary
+workspace $ws5 output secondary
+workspace $ws6 output secondary
 
 # bind program to workspace and focus to them on startup:
 assign [class="(?i)alacritty"] $ws1
@@ -404,7 +404,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
-exec --no-startup-id ~/.screenlayout/monitor.sh
+# exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
@@ -508,7 +508,7 @@ set $yellowbrown	#e1b700
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		    	$lightblue	$darkblue	$white		$mediumgrey	$mediumgrey
+client.focused		    	$yellowbrown	$darkblue	$white		$mediumgrey	$mediumgrey
 client.unfocused	    	$darkblue	$darkblue	$grey		$darkgrey	$darkgrey
 client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
@@ -526,7 +526,7 @@ bar {
 #	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
-		    #tray_output primary
+		    tray_output primary
 		    tray_padding 0
 
 # When strip_workspace_numbers is set to yes,
