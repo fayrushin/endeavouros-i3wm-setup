@@ -6,5 +6,6 @@ if [ "$hdmi" ]; then
 	xrandr --output "$hdmi" --primary --mode 3840x2160 --pos 2560x0 --rotate normal \
 		--output "$edp" --mode 2560x1600 --pos 0x560 --rotate normal
 else
-	xrandr --auto
+	edp=$(xrandr -q | grep -w "connected" | awk '{print $1}')
+	xrandr --output $edp --primary --auto
 fi
