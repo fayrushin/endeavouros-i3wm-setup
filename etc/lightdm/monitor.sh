@@ -9,3 +9,4 @@ else
 	edp=$(xrandr -q | grep -w "connected" | awk '{print $1}')
 	xrandr --output $edp --primary --mode 2560x1600 --rate 60
 fi
+sleep 1 && feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros-wallpaper.png
