@@ -70,6 +70,9 @@ else:
     elif state == "Full":
         fulltext = FA_PLUG + " "
         timeleft = ""
+    elif state == "Not charging":
+        fulltext = FA_PLUG + " "
+        timeleft = ""
     elif state == "Unknown":
         fulltext = FA_QUESTION + " " + FA_BATTERY + " "
         timeleft = ""
