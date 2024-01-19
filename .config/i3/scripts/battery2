@@ -27,7 +27,7 @@ else:
     percentleft_batteries=[]
     time = ""
     for battery in batteries:
-        if battery!='':
+        if battery!='' and battery.split(":")[0]=='Battery 1':
             state_batteries.append(battery.split(": ")[1].split(", ")[0])
             commasplitstatus = battery.split(", ")
             if not time:
@@ -101,7 +101,7 @@ else:
 
     form =  '<span color="{}">{}%</span>'
     fulltext += form.format(color(percentleft), percentleft)
-    #fulltext += timeleft
+    fulltext += timeleft
 
 print(fulltext)
 print(fulltext)
