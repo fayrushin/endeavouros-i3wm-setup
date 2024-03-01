@@ -7,6 +7,6 @@ if [ "$hdmi" ]; then
 		--output "$edp" --mode 2560x1600 --pos 0x560 --rotate normal
 else
 	edp=$(xrandr -q | grep -w "connected" | awk '{print $1}')
-	xrandr --output $edp --primary --mode 2560x1600 --rate 60
+	xrandr --output $edp --primary --mode 2560x1600 --rate 240
 fi
 sleep 1 && feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros-wallpaper.png
