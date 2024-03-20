@@ -302,8 +302,8 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied"
 
 # Power Profiles menu switcher (rofi)
-# bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
-bindsym $mod+Shift+p exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
+bindsym $mod+Shift+s exec --no-startup-id systemctl suspend
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -472,6 +472,8 @@ for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [title="^zoom$"] floating enable
+for_window [title="T1server-core2"] floating enable
+
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
