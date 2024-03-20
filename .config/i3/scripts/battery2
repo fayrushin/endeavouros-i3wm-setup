@@ -27,7 +27,7 @@ else:
     percentleft_batteries=[]
     time = ""
     for battery in batteries:
-        if battery!='' and battery.split(":")[0]=='Battery 1':
+        if battery!='' and battery.split(":")[0]=='Battery 0':
             state_batteries.append(battery.split(": ")[1].split(", ")[0])
             commasplitstatus = battery.split(", ")
             if not time:

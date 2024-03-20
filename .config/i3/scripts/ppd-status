@@ -7,8 +7,8 @@
 
 # script to show current power profile
 
-# current_profile=$(/usr/bin/powerprofilesctl get)
-current_profile=$(cat /sys/firmware/acpi/platform_profile)
+current_profile=$(/usr/bin/powerprofilesctl get)
+# current_profile=$(cat /sys/firmware/acpi/platform_profile)
 if [[ "$current_profile" = "balanced" ]]; then
   echo " "
   echo " "
