@@ -18,8 +18,8 @@ AUDIO_DELTA=${AUDIO_DELTA:-5}
 DEFAULT_COLOR=${DEFAULT_COLOR:-"#ffffff"}
 MUTED_COLOR=${MUTED_COLOR:-"#a0a0a0"}
 
-LONG_FORMAT=${LONG_FORMAT:-'${SYMB} ${VOL}% [${INDEX}:${NAME}]'}
-SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB} ${VOL}% [${INDEX}]'}
+LONG_FORMAT=${LONG_FORMAT:-'${SYMB} ${VOL}% [${NAME}]'}
+SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB} ${VOL}%'}
 USE_ALSA_NAME=${USE_ALSA_NAME:-0}
 USE_DESCRIPTION=${USE_DESCRIPTION:-0}
 
@@ -115,34 +115,18 @@ case "$BLOCK_BUTTON" in
 esac
 
 function print_format {
-    echo "$1" | envsubst '${SYMB}${VOL}${INDEX}${NAME}'
+    echo "$1" | envsubst '${SYMB}${VOL}${NAME}'
 }
 
 function print_block {
-    ACTIVE="$(pactl list sinks  | grep "State: RUNNING" -B4 -A55)"
-    if [[ $ACTIVE = "" ]] ; then
-        ACTIVE="$(pactl list sinks | grep "$(pactl get-default-sink)" -B4 -A55)"
-    fi
-    ACTIVE="$(echo "$ACTIVE" | grep "Name:\|Volume: \(front-left\|mono\)\|Mute:\|api.alsa.pcm.card = \|node.nick = ")"
-    for Name in NAME MUTED VOL INDEX NICK; do
-        read $Name
+    ACTIVE="$(pactl list sinks | grep "$(pactl get-default-sink)" -B4 -A55)"
+    ACTIVE="$(echo "$ACTIVE" | grep "Description:\|Volume: \(front-left\|mono\)\|Mute: ")"
+    for Name in DESCRIPTION MUTED VOL NICK; do
+	    read $Name
     done < <(echo "$ACTIVE")
-    INDEX=$(echo "$INDEX"  | grep -o '".*"' | sed 's/"//g')
-    VOL=$(echo "$VOL" | grep -o "[0-9]*%" | head -1 )
+    VOL=$(echo "$VOL" | grep -o "[0-9]*%" | head -1)
     VOL="${VOL%?}"
-    NAME=$(echo "$NICK" | grep -o '".*"' | sed 's/"//g')
-
-    if [[ $USE_ALSA_NAME == 1 ]] ; then
-        ALSA_NAME=$(pactl list sinks |\
-awk '/^\s*\*/{f=1}/^\s*index:/{f=0}f' |\
-grep "alsa.name\|alsa.mixer_name" |\
-head -n1 |\
-sed 's/.*= "\(.*\)".*/\1/')
-        NAME=${ALSA_NAME:-$NAME}
-    elif [[ $USE_DESCRIPTION == 1 ]] ; then
-        DESCRIPTION=$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55 | grep 'Description: ' | sed 's/^.*: //')
-        NAME=${DESCRIPTION:-$NAME}
-    fi
+    NAME=$(echo "$DESCRIPTION" | sed 's/^.*: //')
 
     if [[ $MUTED =~ "no" ]] ; then
         SYMB=$AUDIO_HIGH_SYMBOL
