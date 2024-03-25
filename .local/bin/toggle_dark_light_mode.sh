@@ -1,11 +1,17 @@
 #!/bin/bash
 
-if [[ "$#" -ne 2 ]]; then
-	echo "You must enter <mode> <user>"
+if [[ "$#" -ne 1 ]]; then
+	echo "You must enter  <user>"
 	exit 1
 fi
-mode=$1
-user=$2
+mode=$(cat ~/.local/bin/mode.ini)
+if [[ "$mode" = "light" ]]; then
+	mode="dark"
+else
+  mode="light"
+fi
+echo $mode > ~/.local/bin/mode.ini
+user=$1
 cp "/home/${user}/.config/tmux/tmux.${mode}.conf" "/home/${user}/.tmux.conf"
 cp "/home/${user}/.config/alacritty/alacritty.${mode}.toml" "/home/${user}/.config/alacritty/alacritty.toml"
 cp "/home/${user}/.config/gtk-3.0/settings.${mode}.ini" "/home/${user}/.config/gtk-3.0/settings.ini"
@@ -16,4 +22,4 @@ if [[ "$mode" = "light" ]]; then
 	scheme="dayfox"
 fi
 sed -i "${n1}s/.*/  colorscheme = \"${scheme}\",/" "/home/${user}/.config/nvim/lua/user/init.lua"
-tmux source-file "/home/${user}/.tmux.conf"
+# tmux source-file "/home/${user}/.tmux.conf"
