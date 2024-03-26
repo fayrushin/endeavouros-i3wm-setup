@@ -27,7 +27,7 @@ else:
     percentleft_batteries=[]
     time = ""
     for battery in batteries:
-        if battery!='' and battery.split(":")[0]=='Battery 0':
+        if battery!='' and battery.split(":")[1].split(", ")[1]!='0%':
             state_batteries.append(battery.split(": ")[1].split(", ")[0])
             commasplitstatus = battery.split(", ")
             if not time:
@@ -58,8 +58,20 @@ else:
     # stands for plugged in
     FA_PLUG = "<span font='FontAwesome'>\uf1e6</span>"
 
+    def battery(percent):
+        if percent < 5:
+            return "<span font='FontAwesome'>\uf244</span>"
+        if percent < 30:
+            return "<span font='FontAwesome'>\uf243</span>"
+        if percent < 55:
+            return "<span font='FontAwesome'>\uf242</span>"
+        if percent < 80:
+            return "<span font='FontAwesome'>\uf241</span>"
+        return  "<span font='FontAwesome'>\uf240</span>"
+    
     # stands for using battery
-    FA_BATTERY = "<span font='FontAwesome'>\uf240</span>"
+    FA_BATTERY = battery(percentleft)
+        
 
     # stands for unknown status of battery
     FA_QUESTION = "<span font='FontAwesome'>\uf128</span>"
