@@ -151,3 +151,9 @@ Make sure you backup users configs before running it on your own.
 # screenshot:
 ![i3-fresh-screenshot](https://raw.githubusercontent.com/endeavouros-team/screenshots/master/i3-eos-view-shot-nov21.png)
 
+# setup monitor plug and suspend
+cp etc/udev/rules.d/99-monitor-hotplug.rules /etc/udev/rules.d
+cp .local/bin/monitor_setup.sh ~/.local/bin/
+cp .local/bin/monitor.sh ~/.local/bin
+cp etc/systemd/logind.conf /etc/systemd/logind.conf
+
