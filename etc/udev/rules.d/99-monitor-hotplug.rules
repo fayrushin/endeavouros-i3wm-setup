@@ -1,0 +1,1 @@
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/home/ravil/.local/bin/monitor_setup.sh"
