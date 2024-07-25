@@ -316,7 +316,7 @@ set $ws10 "10"
 # you can get from xrandr command
 workspace $ws1 output primary
 workspace $ws2 output primary
-workspace $ws3 output seconary
+workspace $ws3 output secondary
 workspace $ws4 output secondary
 workspace $ws5 output primary
 workspace $ws6 output primary
@@ -396,7 +396,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
-exec --no-startup-id ~/.local/bin/monitor.sh
+exec --no-startup-id ~/.local/bin/monitor_setup.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
