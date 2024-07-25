@@ -53,8 +53,8 @@ new_window pixel 2
 # hide_edge_borders both
 
 # Set inner/outer gaps
-gaps inner 6
-gaps outer 3
+gaps inner 3
+gaps outer 1
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -280,9 +280,9 @@ bindsym $mod+w exec --no-startup-id /usr/bin/google-chrome-stable
 bindsym $mod+n exec --no-startup-id /usr/bin/thunar
 
 # Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T")" && notify-send "Screenshot saved"
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T").png" && notify-send "Screenshot saved"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T").png" && notify-send "Screenshot saved"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/screenshots/$(date +"%Y-%m-%d-%T").png" && notify-send "Screenshot saved"
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied"
@@ -314,29 +314,29 @@ set $ws10 "10"
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
 # you can get from xrandr command
-# workspace $ws1 output primary
-# workspace $ws2 output primary
-# workspace $ws3 output primary
-# workspace $ws4 output secondary
-# workspace $ws5 output secondary
-# workspace $ws6 output secondary
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output seconary
+workspace $ws4 output secondary
+workspace $ws5 output primary
+workspace $ws6 output primary
 
 # bind program to workspace and focus to them on startup:
-assign [class="(?i)alacritty"] $ws1
-assign [class="(?i)Google-chrome"] $ws2
-assign [class="zoom"] $ws3
-assign [class="TelegramDesktop"] $ws4
-assign [class="Thunar"] $ws5
-assign [class="VirtualBox Machine"] $ws6
-assign [class="VirtualBox Manager"] $ws6
+# assign [class="(?i)alacritty"] $ws1
+# assign [class="(?i)Google-chrome"] $ws2
+# assign [class="zoom"] $ws3
+# assign [class="TelegramDesktop"] $ws4
+# assign [class="Thunar"] $ws5
+# assign [class="VirtualBox Machine"] $ws6
+# assign [class="VirtualBox Manager"] $ws6
 
 # automatic set focus new window if it opens on another workspace than the current:
-for_window [class=(?i)alacritty] focus
-for_window [class=(?i)Google-chrome] focus
-for_window [class=TelegramDesktop] focus
-for_window [class=Thunar] focus
-for_window [class="VirtualBox Manager"] focus
-for_window [class="VirtualBox Machine"] focus
+# for_window [class=(?i)alacritty] focus
+# for_window [class=(?i)Google-chrome] focus
+# for_window [class=TelegramDesktop] focus
+# for_window [class=Thunar] focus
+# for_window [class="VirtualBox Manager"] focus
+# for_window [class="VirtualBox Machine"] focus
 
 ##############
 # compositor #
@@ -460,7 +460,7 @@ exec --no-startup-id /usr/bin/dunst
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [title="^zoom$"] floating enable
+# for_window [title="^zoom$"] floating enable
 for_window [title="T1server-core2"] floating enable
 
 
