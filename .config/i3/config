@@ -176,6 +176,9 @@ bindsym $mod+Return exec --no-startup-id alacritty
 # kill focused window
 bindsym $mod+q kill
 
+#move current ws to another monitor
+bindsym $mod+Shift+o exec ~/.local/bin/move_ws.sh
+
 # exit-menu
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
 
