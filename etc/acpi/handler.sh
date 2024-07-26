@@ -10,14 +10,14 @@ is_external_monitor_connected() {
     return $?
 }
 turn_off_laptop_screen() {
-    hdmi=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
-    if [ "$hdmi" ]; then
+    external=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
+    if [ "$external" ]; then
 	    # Get the list of all workspaces on eDP-2
         workspaces=$(i3-msg -t get_workspaces | jq -r '.[] | select(.output == "eDP-2") | .num')
 
-        # Move each workspace to hdmi
+        # Move each workspace to external
         for workspace in $workspaces; do
-            i3-msg "workspace number $workspace; move workspace to output $hdmi"
+            i3-msg "workspace number $workspace; move workspace to output $external"
         done
 	fi
     xrandr --output eDP-2 --off
@@ -25,10 +25,10 @@ turn_off_laptop_screen() {
 
 turn_on_laptop_screen() {
     # xrandr --output eDP-2 --auto
-    hdmi=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
-    if [ "$hdmi" ]; then
-	    edp=$(xrandr -q | grep -w "connected" | grep -v "${hdmi}" | awk '{print $1}')
-	    xrandr --output "$hdmi" --primary --mode 2560x1440 --pos 2560x0 --rate 144 --rotate normal \
+    external=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
+    if [ "$external" ]; then
+	    edp=$(xrandr -q | grep -w "connected" | grep -v "${external}" | awk '{print $1}')
+	    xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 144 --rotate normal \
 		    --output "$edp" --mode 2560x1600 --pos 0x0 --rotate normal
 		i3-msg "workspace number 3; move workspace to output $edp"
 		i3-msg "workspace number 4; move workspace to output $edp"
@@ -36,7 +36,7 @@ turn_on_laptop_screen() {
 	    edp=$(xrandr -q | grep -w "connected" | awk '{print $1}')
 	    xrandr --output $edp --primary --mode 2560x1600 --rate 240
 	    # Get the list of all workspaces
-        workspaces=$(i3-msg -t get_workspaces | jq -r '.[].num')
+        workspaces=$(i3-msg -t get_workspaces | jq -r --arg edp "$edp" '.[] | select(.output != $edp) | .num')
 
         # Move each workspace to eDP-2
         for workspace in $workspaces; do
@@ -105,7 +105,7 @@ case "$1" in
         case "$3" in
             close)
                 if is_external_monitor_connected; then
-                    logger "Handler: Lid closed while external monitor ${hdmi} connected, do not suspend"
+                    logger "Handler: Lid closed while external monitor connected, do not suspend"
                     turn_off_laptop_screen
                 else
                     logger "Handler: Lid closed while external monitor disconnected, suspend"

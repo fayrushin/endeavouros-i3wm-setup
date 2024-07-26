@@ -1,0 +1,10 @@
+[Unit]
+Description=Run script on wake from suspend
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/sleep-monitor.sh
+
+[Install]
+WantedBy=suspend.target
