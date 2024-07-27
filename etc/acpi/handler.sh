@@ -28,7 +28,7 @@ turn_on_laptop_screen() {
     external=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
     if [ "$external" ]; then
 	    edp=$(xrandr -q | grep -w "connected" | grep -v "${external}" | awk '{print $1}')
-	    xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 144 --rotate normal \
+	    xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 165 --rotate normal \
 		    --output "$edp" --mode 2560x1600 --pos 0x0 --rotate normal
 		i3-msg "workspace number 3; move workspace to output $edp"
 		i3-msg "workspace number 4; move workspace to output $edp"

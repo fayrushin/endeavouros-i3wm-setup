@@ -6,7 +6,7 @@ export XAUTHORITY=/home/ravil/.Xauthority
 external=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
 if [ "$external" ]; then
 	edp=$(xrandr -q | grep -w "connected" | grep -v "${external}" | awk '{print $1}')
-	xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 144 --rotate normal \
+	xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 165 --rotate normal \
 		--output "$edp" --mode 2560x1600 --pos 0x0 --rotate normal
 
 	EXCLUDE_WORKSPACES=("3" "4")
