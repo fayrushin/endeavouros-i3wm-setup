@@ -3,8 +3,10 @@
 export DISPLAY=:0
 export XAUTHORITY=/home/ravil/.Xauthority
 
+logger "monitor_setup::Changing monitor layout..."
 external=$(xrandr -q | grep -w "connected" | grep -v eDP | awk '{print $1}')
 if [ "$external" ]; then
+  logger "monitor_setup::External monitor connected: $external"
 	edp=$(xrandr -q | grep -w "connected" | grep -v "${external}" | awk '{print $1}')
 	xrandr --output "$external" --primary --mode 2560x1440 --pos 2560x0 --rate 165 --rotate normal \
 		--output "$edp" --mode 2560x1600 --pos 0x0 --rotate normal
@@ -33,6 +35,7 @@ if [ "$external" ]; then
   done
   
 else
+  logger "monitor_setup::No external monitor connected"
   edp=$(xrandr -q | grep -w "connected" | awk '{print $1}')
   xrandr --output "$edp" --primary --mode 2560x1600 --rate 240
 	# Get the list of all workspaces
