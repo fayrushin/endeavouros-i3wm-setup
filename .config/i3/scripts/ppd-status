@@ -13,7 +13,7 @@ if [[ "$current_profile" = "balanced" ]]; then
   echo " "
   echo " "
   echo "#FFFFFF"
-elif [[ "$current_profile" = "quiet" ]]; then
+elif [[ "$current_profile" = "quiet"  || "$current_profile" = "power-saver" ]]; then
   echo ""
   echo ""
   echo "#50bF10"
