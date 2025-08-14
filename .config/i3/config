@@ -177,7 +177,10 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+q kill
 
 #move current ws to another monitor
-bindsym $mod+Shift+o exec ~/.local/bin/move_ws.sh
+bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Down move workspace to output down
 
 # exit-menu
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
